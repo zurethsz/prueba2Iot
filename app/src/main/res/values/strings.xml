@@ -8,9 +8,10 @@
     <string name="toolbar_title_sensors">Sensores</string>
     <string name="btnAddSensor">Agregar un nuevo sensor</string>
     <string name="input_search_sensor">Buscar un sensor </string>
-    <string name="greenhouse_name">nombre invernadero:</string>
+    <string name="greenhouse_name">nombre invernadero</string>
     <string name="textViewInputName">arandanos peruanos</string>
-    <string name="textViewDescription">Descripción: zona de arandanos con arandanos porque osino no seria una zona de arandanos</string>
+    <string name="textViewDescriptionTitle">Descripción</string>
+    <string name="textViewDescription">zona de arandanos con arandanos porque osino no seria una zona de arandanos</string>
 
     <!-- agregar ubicacion -->
     <string name="toolbar_title_add_location">Agregar Ubicacion</string>

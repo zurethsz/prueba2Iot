@@ -40,18 +40,19 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+
     <Button
         android:id="@+id/buttonAddSensor"
         android:layout_width="192dp"
         android:layout_height="66dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginBottom="17dp"
         android:backgroundTint="@color/verdeoscuro"
         android:text="@string/btnAddSensor"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewNameGreenhouse"
+        app:layout_constraintBottom_toTopOf="@+id/greenhouse_name"
         app:layout_constraintEnd_toStartOf="@+id/searchSensorEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -61,82 +62,91 @@
         android:layout_width="194dp"
         android:layout_height="66dp"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="17dp"
         android:ems="10"
         android:hint="@string/input_search_sensor"
         android:inputType="text"
         android:text=""
         android:textColorHint="#292A29"
-        app:layout_constraintBottom_toTopOf="@+id/textViewNombreInvernadero"
+        app:layout_constraintBottom_toTopOf="@+id/greenhouse_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonAddSensor"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-
     <TextView
-        android:id="@+id/textViewNameGreenhouse"
-        android:layout_width="186dp"
+        android:id="@+id/greenhouse_name"
+        android:layout_width="388dp"
         android:layout_height="26dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="12dp"
         android:text="@string/greenhouse_name"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewDescriptionUbicacion"
-        app:layout_constraintEnd_toStartOf="@+id/textViewNombreInvernadero"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddSensor" />
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNombreInvernadero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewNameGreenhouse"
+        android:layout_width="399dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/textViewDescriptionTitle"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDescriptionUbicacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewNombreInvernadero"
-        android:layout_width="197dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="12dp"
+        android:layout_width="376dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="4dp"
         android:text="@string/textViewInputName"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewDescriptionUbicacion"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNameGreenhouse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewNameGreenhouse" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewDescriptionUbicacion"
         android:layout_width="393dp"
         android:layout_height="71dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="1dp"
-        android:text="@string/textViewDescription"
+        android:layout_marginBottom="2dp"
+        android:text="@string/textViewDescriptionTitle"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/listViewSensor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNameGreenhouse" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ListView
         android:id="@+id/listViewSensor"
-        android:layout_width="407dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="413dp"
+        android:layout_height="525dp"
         android:divider="@color/white"
         android:dividerHeight="2dp"
         android:listSelector="@color/verdeclaro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionUbicacion" />
-
-
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

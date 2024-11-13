@@ -181,6 +181,7 @@ public class DetailsLocation extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        searchSensorEditText.setText("");
     }
 
     public void irAMainActivity(View view) {
