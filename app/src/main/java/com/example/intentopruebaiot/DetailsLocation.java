@@ -77,16 +77,6 @@ public class DetailsLocation extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == 1 && data != null) {
-            // Si es un sensor modificado
-            if (data.hasExtra("sensorModificado")) {
-                Sensor sensorModificado = (Sensor) data.getSerializableExtra("sensorModificado");
-
-                // Actualizar el sensor modificado en la lista usando la posición pasada en requestCode
-                if (invernadero.getSensores().size() > 0) {
-                    invernadero.getSensores().set(resultCode, sensorModificado);  // Usamos el requestCode como índice
-                    sensorAdapter.notifyDataSetChanged();
-                }
-            }
 
             // Si es un nuevo sensor
             if (data.hasExtra("sensorNuevo")) {
@@ -115,11 +105,17 @@ public class DetailsLocation extends AppCompatActivity {
             }
 
             // Si se ha recibido un invernadero actualizado (del regreso de DetailsSensor)
-            if (data.hasExtra("invernaderoActualizadoSensor")) {
-                Invernadero invernaderoActualizado = (Invernadero) data.getSerializableExtra("invernaderoActualizadoSensor");
+            if (data.hasExtra("sensorModificado")) {
+                Sensor sensor = (Sensor) data.getSerializableExtra("sensorModificado");
 
+                if (sensor == null) return;
                 // Actualizar el invernadero con los sensores modificados
-                invernadero.setSensores(invernaderoActualizado.getSensores());
+                for (Sensor sen : invernadero.getSensores()) {
+                    if (sen.getId() == sensor.getId()) {
+                        sen = sensor;
+                        break;
+                    }
+                }
                 // Notificar al adaptador que se ha actualizado el invernadero
                 sensorAdapter.notifyDataSetChanged();
             }
@@ -130,8 +126,7 @@ public class DetailsLocation extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        // Refrescar la lista de sensores cuando se regrese a esta actividad
-        sensorAdapter.notifyDataSetChanged();
+
     }
 
     public void irAMainActivity(View view) {

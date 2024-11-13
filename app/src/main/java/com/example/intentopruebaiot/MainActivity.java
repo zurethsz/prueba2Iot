@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button buttonNavigate = findViewById(R.id.button);
+
+        listGreenHouse.add(new Invernadero("Invernadero 1",  "Descripción 1"));
+
         listView = findViewById(R.id.listViewLocations);
         customBaseAdaptr = new CustomBaseAdaptr(this, listGreenHouse);
         listView.setAdapter(customBaseAdaptr);

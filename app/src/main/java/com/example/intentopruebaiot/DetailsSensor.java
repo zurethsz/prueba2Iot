@@ -89,10 +89,10 @@ public class DetailsSensor extends AppCompatActivity {
 
     public void irADetailsLocation(View view) {
 
-        Intent pantalla = new Intent(DetailsSensor.this, DetailsLocation.class);
-        pantalla.putExtra("invernaderoActualizadoSensor", invernadero);
+        Intent pantalla = new Intent();
+        pantalla.putExtra("sensorModificado", sensor);
         System.out.println("detailsSensor : " +invernadero.getSensores());
-        startActivityForResult(pantalla, 1); // Usamos startActivityForResult para recibir el invernadero creado
+        setResult(1, pantalla);
         finish();
     }
 }
