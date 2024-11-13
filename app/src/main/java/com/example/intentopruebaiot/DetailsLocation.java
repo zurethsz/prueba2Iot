@@ -2,7 +2,10 @@ package com.example.intentopruebaiot;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Button;
@@ -11,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.intentopruebaiot.model.Invernadero;
 import com.example.intentopruebaiot.model.Sensor;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DetailsLocation extends AppCompatActivity {
 
@@ -21,6 +28,8 @@ public class DetailsLocation extends AppCompatActivity {
     Button backButton;
     Invernadero invernadero;
     SensorAdapter sensorAdapter;
+    EditText searchSensorEditText; // Referencia al EditText de búsqueda
+
     Invernadero invernaderoActualizadoSensor;
 
     @Override
@@ -33,6 +42,7 @@ public class DetailsLocation extends AppCompatActivity {
         nombreUbicacionTextView = findViewById(R.id.textViewNombreInvernadero);
         descripcionUbicacionTextView = findViewById(R.id.textViewDescriptionUbicacion);
         buttonAddSensor = findViewById(R.id.buttonAddSensor);
+        searchSensorEditText = findViewById(R.id.searchSensorEditText); // Inicializar EditText de búsqueda
 
         // Obtener el invernadero desde el Intent
         Intent intent = getIntent();
@@ -40,10 +50,9 @@ public class DetailsLocation extends AppCompatActivity {
         invernaderoActualizadoSensor  = (Invernadero) intent.getSerializableExtra("invernaderoActualizadoSensor");
 
         if (invernaderoActualizadoSensor != null) {
-
             invernadero = invernaderoActualizadoSensor;
-
         }
+
         // Mostrar los detalles del invernadero en los TextViews
         nombreUbicacionTextView.setText(invernadero.getNombre());
         descripcionUbicacionTextView.setText(invernadero.getDescripcion());
@@ -54,22 +63,60 @@ public class DetailsLocation extends AppCompatActivity {
 
         // Configurar el clic en un item de la lista de sensores
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            Sensor sensorSeleccionado = invernadero.getSensores().get(position);
+            Sensor sensorSeleccionado = (Sensor) sensorAdapter.getItem(position); // Obtener el sensor desde el adaptador
 
             // Enviar el invernadero y el sensor a la pantalla de detalles del sensor
             Intent intentDetailsSensor = new Intent(DetailsLocation.this, DetailsSensor.class);
             intentDetailsSensor.putExtra("invernadero", invernadero);
             intentDetailsSensor.putExtra("sensor", sensorSeleccionado);
+            System.out.println("DetailsSensor enviando informacion a detailsSensor : " + sensorSeleccionado);
             startActivityForResult(intentDetailsSensor, position);  // Usamos la posición como requestCode
-
         });
 
         // Configurar el botón para agregar un nuevo sensor
         buttonAddSensor.setOnClickListener(v -> {
             Intent pantallaSensor = new Intent(DetailsLocation.this, addSensor.class);
             startActivityForResult(pantallaSensor, 0);  // Usamos 0 para indicar que es un nuevo sensor
-
         });
+
+        // Configurar el TextWatcher para filtrar la lista de sensores
+        searchSensorEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                filterSensors(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+    }
+
+    private void filterSensors(String query) {
+        ArrayList<Sensor> filteredList = new ArrayList<>();
+
+        // Filtrar los sensores por nombre
+        for (Sensor sensor : invernadero.getSensores()) {
+            if (sensor.getNombre().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(sensor);
+            }
+        }
+
+        // Ordenar la lista filtrada por nombre
+        Collections.sort(filteredList, new Comparator<Sensor>() {
+            @Override
+            public int compare(Sensor sensor1, Sensor sensor2) {
+                return sensor1.getNombre().compareToIgnoreCase(sensor2.getNombre());
+            }
+        });
+
+        // Actualizar el adaptador con la lista filtrada y ordenada
+        sensorAdapter = new SensorAdapter(this, filteredList);
+        listView.setAdapter(sensorAdapter);
     }
 
     @Override
@@ -106,16 +153,25 @@ public class DetailsLocation extends AppCompatActivity {
 
             // Si se ha recibido un invernadero actualizado (del regreso de DetailsSensor)
             if (data.hasExtra("sensorModificado")) {
-                Sensor sensor = (Sensor) data.getSerializableExtra("sensorModificado");
+                Sensor sensorModificado = (Sensor) data.getSerializableExtra("sensorModificado");
+                System.out.println("entra a la modificacion con : " + invernadero.getSensores());
 
-                if (sensor == null) return;
-                // Actualizar el invernadero con los sensores modificados
-                for (Sensor sen : invernadero.getSensores()) {
-                    if (sen.getId() == sensor.getId()) {
-                        sen = sensor;
+                if (sensorModificado == null) return;
+
+                int index = -1;
+                for (int i = 0; i < invernadero.getSensores().size(); i++) {
+                    if (invernadero.getSensores().get(i).getId() == sensorModificado.getId()) {
+                        index = i;
                         break;
                     }
                 }
+
+                if (index != -1) {
+                    invernadero.getSensores().set(index, sensorModificado);
+                }
+
+                System.out.println("termina el ciclo con: " + invernadero.getSensores());
+
                 // Notificar al adaptador que se ha actualizado el invernadero
                 sensorAdapter.notifyDataSetChanged();
             }
@@ -125,8 +181,6 @@ public class DetailsLocation extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
 
     public void irAMainActivity(View view) {

@@ -79,7 +79,7 @@ public class DetailsSensor extends AppCompatActivity {
             sensor = (Sensor) data.getSerializableExtra("sensor");
             TextView nombreSensorTextView = findViewById(R.id.tvSensorName);
             TextView descripcionSensorTextView = findViewById(R.id.tvSensorDescription);
-
+            System.out.println(sensor.getNombre());
             // Establecer los valores del sensor
             nombreSensorTextView.setText(sensor.getNombre());
             descripcionSensorTextView.setText(sensor.getDescripcion());
@@ -91,7 +91,7 @@ public class DetailsSensor extends AppCompatActivity {
 
         Intent pantalla = new Intent();
         pantalla.putExtra("sensorModificado", sensor);
-        System.out.println("detailsSensor : " +invernadero.getSensores());
+        System.out.println("detailsSensor enviando informacion a detailsLocation : " +invernadero.getSensores());
         setResult(1, pantalla);
         finish();
     }
