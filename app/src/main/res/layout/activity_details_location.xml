@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailsLocation">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/verdeoscuro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start|center_vertical"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            app:srcCompat="@drawable/flechaizquierda"
+            android:onClick="irAMainActivity"
+            />
+
+        <TextView
+            android:id="@+id/toolbar_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/toolbar_title_sensors"
+            android:textColor="@color/white"
+            android:textSize="35sp" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+
+    <Button
+        android:id="@+id/buttonAddSensor"
+        android:layout_width="192dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="11dp"
+        android:text="@string/btnAddSensor"
+        android:backgroundTint="@color/verdeoscuro"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNameGreenhouse"
+        app:layout_constraintEnd_toStartOf="@+id/editTextText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="194dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:ems="10"
+        android:hint="@string/input_search_sensor"
+        android:inputType="text"
+        android:text=""
+        android:textColorHint="#292A29"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNombreInvernadero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonAddSensor"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+    <TextView
+        android:id="@+id/textViewNameGreenhouse"
+        android:layout_width="186dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/greenhouse_name"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDescriptionUbicacion"
+        app:layout_constraintEnd_toStartOf="@+id/textViewNombreInvernadero"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddSensor" />
+
+
+    <TextView
+        android:id="@+id/textViewNombreInvernadero"
+        android:layout_width="197dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/textViewInputName"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDescriptionUbicacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewNameGreenhouse" />
+
+    <TextView
+        android:id="@+id/textViewDescriptionUbicacion"
+        android:layout_width="393dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/textViewDescription"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/listViewSensor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNameGreenhouse" />
+
+    <ListView
+        android:id="@+id/listViewSensor"
+        android:layout_width="407dp"
+        android:layout_height="553dp"
+        android:layout_marginTop="12dp"
+        android:divider="@color/white"
+        android:dividerHeight="2dp"
+        android:listSelector="@color/verdeclaro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionUbicacion" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
